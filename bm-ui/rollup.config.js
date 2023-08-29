@@ -9,7 +9,7 @@ import { terser } from 'rollup-plugin-terser';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import postcss from 'rollup-plugin-postcss';
-import path  from 'path';
+import path, { resolve }  from 'path';
 import fs from 'fs'
 function getEntries(path) {
     let files = fs.readdirSync(resolve(path))
@@ -27,17 +27,16 @@ function getEntries(path) {
     return entries
   }
 export default{
-  input: ['./package/index.ts'],
+  input: resolve(__dirname,'./package/index.ts'),
   output: {
     file: 'dist/main.js',
-    format: 'es'
+    format: 'es',
+    name:"bm-ui"
   },
   plugins: [
     typescript(), // 会自动读取sconfig.json配置文件
     postcss({ 
       extensions: ['.css'], // 将scss解析成css
-      extract: true,
-      modules: true,
     }),
     clear({
       targets: ['dist']
@@ -51,8 +50,12 @@ export default{
     commonjs(),
     babel(), // 会自动读取babel的配置文件
     terser(),
-    serve('dist'),
-    livereload('src'), // 当src目录中的文件发生变化时，刷新页面
+    // livereload('./example'), // 当src目录中的文件发生变化时，刷新页面
+    // serve({
+    //     open:true,
+    //     port: 8082,
+    //     contentBase: ''
+    //   })
   ],
   external: [{
     includeDependencies: true,

@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
-import { sum } from 'utils/index';
 import styles from './App.module.scss';
-
-console.log('sum', sum(1, 2));
+import { Button } from '../package/index'
 console.log('styles', styles);
 
 
@@ -13,7 +11,9 @@ interface Props {
 const App:FC <Props> = (props) => {
   const { name } = props;
   return (
-    <div className={styles.textRed} >{name}</div>
+    <div className={styles.textRed} >
+      <Button></Button>
+      {name}</div>
   );
 }
 

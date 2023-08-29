@@ -1,9 +1,9 @@
 import React from "react";
+import styles from './index.module.scss';
 export default function Button () {
-    console.log(111111)
     return (
        <div>
-         <button>
+         <button className={styles.button}>
             我是一个button
         </button>
        </div>
